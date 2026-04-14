@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>SR Automobiles – Quality Tiller & Tractor Tines in Ooty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Merriweather:wght@700;900&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --navy:       #0d1e35;
+      --navy2:      #112240;
+      --blue:       #1a4fa0;
+      --blue-dark:  #144088;
+      --white:      #ffffff;
+      --off-white:  #f7f8fc;
+      --light-gray: #f0f2f8;
+      --text:       #1e2a3b;
+      --text-muted: #5a6a7e;
+      --border:     #dde2ed;
+      --radius:     8px;
+      --radius-lg:  14px;
+      --shadow-sm:  0 2px 12px rgba(0,0,0,.08);
+      --shadow:     0 6px 28px rgba(0,0,0,.10);
+      --shadow-lg:  0 12px 48px rgba(0,0,0,.14);
+
+      /* ── Precision easing tokens ── */
+      --ease-out:      cubic-bezier(0.22, 1, 0.36, 1);        /* smooth decelerate */
+      --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);     /* overshoot spring */
+      --ease-material: cubic-bezier(0.4, 0, 0.2, 1);          /* Material standard */
+      --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);        /* refined in-out */
+      --dur-fast:      160ms;
+      --dur-base:      280ms;
+      --dur-slow:      480ms;
+      --dur-slower:    640ms;
+    }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 68px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: #fff;
+      overflow-x: hidden;
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display:block; max-width:100%; }
+    a   { text-decoration:none; color:inherit; }
+
+    ::-webkit-scrollbar { width:5px; }
+    ::-webkit-scrollbar-track  { background:#eef; }
+    ::-webkit-scrollbar-thumb  { background:var(--blue); border-radius:3px; }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .container { max-width:1120px; margin:0 auto; padding:0 5%; }
+
+    /* ============================================================
+       TYPOGRAPHY
+    ============================================================ */
+    .section-heading {
+      font-family:'Merriweather', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight:700;
+      color:var(--navy);
+      line-height:1.3;
+      margin-bottom:16px;
+    }
+    .section-heading.centered { text-align:center; }
+    .section-heading.light    { color:#fff; }
+
+    .underline-accent {
+      height:3px;
+      background:var(--blue);
+      border-radius:2px;
+      margin:10px auto 0;
+      /* animated width — starts 0, JS adds .animate */
+      width:0;
+      transition: width var(--dur-slower) var(--ease-out) 0.15s;
+    }
+    .underline-accent.animate { width:52px; }
+
+    .tag-label {
+      font-size:.72rem; font-weight:700; letter-spacing:.12em;
+      text-transform:uppercase; color:var(--blue); margin-bottom:10px;
+    }
+    .body-text { color:var(--text-muted); margin-bottom:14px; font-size:.95rem; }
+    .body-text.light { color:rgba(255,255,255,.75); }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #navbar {
+      position:fixed; top:0; left:0; width:100%; z-index:1000;
+      background:var(--navy);
+      transition:
+        background  var(--dur-slow) var(--ease-material),
+        box-shadow  var(--dur-slow) var(--ease-material),
+        backdrop-filter var(--dur-slow) var(--ease-material);
+    }
+    #navbar.scrolled {
+      background: rgba(13,30,53,.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(255,255,255,.05), 0 4px 32px rgba(0,0,0,.32);
+    }
+
+    .nav-inner {
+      max-width:1200px; margin:0 auto; padding:0 5%;
+      height:68px; display:flex; align-items:center;
+      justify-content:space-between; gap:24px;
+    }
+
+    .nav-logo {
+      display:flex; align-items:center; gap:10px; flex-shrink:0;
+      transition: opacity var(--dur-base) var(--ease-out),
+                  transform var(--dur-base) var(--ease-spring);
+    }
+    .nav-logo:hover { opacity:.9; transform:scale(1.03); }
+
+    .logo-mark {
+      width:40px; height:40px; background:var(--blue); border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Merriweather', serif; font-weight:900; font-size:14px; color:#fff;
+      flex-shrink:0;
+      transition: box-shadow var(--dur-base) var(--ease-out);
+    }
+    .nav-logo:hover .logo-mark {
+      box-shadow: 0 0 0 3px rgba(26,79,160,.35);
+    }
+    .logo-mark.small { width:32px; height:32px; font-size:12px; }
+
+    .logo-text {
+      font-family:'Merriweather', serif; font-size:.95rem; font-weight:700; color:#fff;
+    }
+
+    .nav-links { display:flex; list-style:none; gap:2rem; margin:0 auto; }
+
+    .nav-links a {
+      color:rgba(255,255,255,.72);
+      font-size:.83rem; font-weight:500; letter-spacing:.04em;
+      padding:4px 0; position:relative;
+      transition: color var(--dur-base) var(--ease-material);
+    }
+    /* sliding underline */
+    .nav-links a::after {
+      content:''; position:absolute; bottom:-2px; left:0;
+      width:0; height:2px;
+      background:#fff;
+      border-radius:2px;
+      transition: width var(--dur-base) var(--ease-out);
+    }
+    .nav-links a:hover         { color:#fff; }
+    .nav-links a:hover::after  { width:100%; }
+
+    /* active section highlight */
+    .nav-links a.active        { color:#fff; }
+    .nav-links a.active::after {
+      width:100%;
+      background:var(--blue);
+      box-shadow: 0 0 8px rgba(26,79,160,.8);
+    }
+
+    /* ── Call Now button ── */
+    .btn-callnow {
+      background:var(--blue); color:#fff;
+      padding:9px 20px; border-radius:6px;
+      font-size:.82rem; font-weight:600; white-space:nowrap;
+      border:2px solid var(--blue); flex-shrink:0;
+      position:relative; overflow:hidden;
+      transition:
+        background  var(--dur-base) var(--ease-material),
+        border-color var(--dur-base) var(--ease-material),
+        transform   var(--dur-base) var(--ease-spring),
+        box-shadow  var(--dur-base) var(--ease-material);
+    }
+    .btn-callnow::before { /* shimmer sweep */
+      content:'';
+      position:absolute; top:0; left:-110%;
+      width:60%; height:100%;
+      background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.22) 50%,transparent 100%);
+      transition: left var(--dur-slow) var(--ease-out);
+    }
+    .btn-callnow:hover {
+      background:var(--blue-dark); border-color:var(--blue-dark);
+      transform:translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 24px rgba(26,79,160,.45);
+    }
+    .btn-callnow:hover::before { left:130%; }
+
+    /* ── Hamburger ── */
+    .hamburger {
+      display:none; flex-direction:column; gap:5px;
+      background:none; border:none; cursor:pointer; padding:6px;
+    }
+    .hamburger span {
+      display:block; width:22px; height:2px;
+      background:#fff; border-radius:2px;
+      transition:
+        transform var(--dur-base) var(--ease-out),
+        opacity   var(--dur-base) var(--ease-material);
+    }
+    .hamburger.active span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity:0; transform:scaleX(0); }
+    .hamburger.active span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+    /* ── Mobile overlay ── */
+    .mobile-overlay {
+      display:none; position:fixed; inset:0;
+      background:var(--navy2); z-index:1100;
+      flex-direction:column; align-items:center; justify-content:center; gap:2rem;
+      opacity:0;
+      transition: opacity 0.32s var(--ease-material);
+    }
+    .mobile-overlay.open { display:flex; opacity:1; }
+
+    .mobile-overlay ul { list-style:none; text-align:center; }
+    .mobile-overlay ul li {
+      margin:1rem 0;
+      opacity:0; transform:translateY(22px);
+      transition:
+        opacity   0.38s var(--ease-out),
+        transform 0.38s var(--ease-out);
+    }
+    .mobile-overlay.open ul li              { opacity:1; transform:translateY(0); }
+    .mobile-overlay.open ul li:nth-child(1) { transition-delay:.06s; }
+    .mobile-overlay.open ul li:nth-child(2) { transition-delay:.12s; }
+    .mobile-overlay.open ul li:nth-child(3) { transition-delay:.18s; }
+    .mobile-overlay.open ul li:nth-child(4) { transition-delay:.24s; }
+    .mobile-overlay.open ul li:nth-child(5) { transition-delay:.30s; }
+    .mobile-overlay.open ul li:nth-child(6) { transition-delay:.36s; }
+
+    .mobile-link {
+      color:#fff; font-size:1.25rem; font-weight:500;
+      position:relative; display:inline-block;
+      transition: opacity var(--dur-fast) var(--ease-material);
+    }
+    .mobile-link::after {
+      content:''; position:absolute; bottom:-3px; left:50%;
+      transform:translateX(-50%);
+      width:0; height:2px;
+      background:rgba(255,255,255,.55);
+      transition: width 0.3s var(--ease-out);
+    }
+    .mobile-link:hover       { opacity:.8; }
+    .mobile-link:hover::after { width:100%; }
+
+    .mobile-close {
+      position:absolute; top:24px; right:28px;
+      background:none; border:none; color:#fff; font-size:1.8rem; cursor:pointer;
+      transition:
+        transform var(--dur-base) var(--ease-spring),
+        opacity   var(--dur-fast) var(--ease-material);
+    }
+    .mobile-close:hover { transform:rotate(90deg) scale(1.12); opacity:.7; }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      min-height:100vh; position:relative;
+      display:flex; align-items:center; justify-content:center;
+      text-align:center; padding:110px 5% 60px; overflow:hidden;
+    }
+
+    .hero-bg {
+      position:absolute; inset:0;
+      background-image:url('images/hero.jpg');
+      background-size:cover; background-position:center 30%;
+      will-change:transform;
+    }
+    .hero-overlay {
+      position:absolute; inset:0; z-index:1;
+      background:linear-gradient(160deg,
+        rgba(10,24,50,.84) 0%,
+        rgba(13,30,53,.74) 50%,
+        rgba(10,24,50,.90) 100%);
+    }
+
+    .hero-content { position:relative; z-index:2; max-width:680px; }
+
+    /* staggered entrance — CSS-driven, no AOS dependency */
+    .hero-tag-line {
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:.72rem; font-weight:700; letter-spacing:.18em;
+      text-transform:uppercase; color:rgba(255,255,255,.6);
+      margin-bottom:18px;
+      opacity:0; transform:translateY(16px);
+      animation: heroIn 0.8s var(--ease-out) 0.25s forwards;
+    }
+    .hero-tag-line .line {
+      display:inline-block; width:26px; height:1px;
+      background:rgba(255,255,255,.35);
+    }
+
+    .hero-title {
+      font-family:'Merriweather', serif;
+      font-size:clamp(2rem, 5vw, 3.2rem);
+      font-weight:900; color:#fff; line-height:1.18;
+      margin-bottom:20px;
+      opacity:0; transform:translateY(36px);
+      animation: heroIn 1s var(--ease-out) 0.5s forwards;
+    }
+
+    .hero-sub {
+      font-size:1rem; color:rgba(255,255,255,.76);
+      line-height:1.72; max-width:520px; margin:0 auto 38px;
+      opacity:0; transform:translateY(24px);
+      animation: heroIn 0.9s var(--ease-out) 0.78s forwards;
+    }
+
+    .hero-btns {
+      display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
+      opacity:0; transform:translateY(18px);
+      animation: heroIn 0.85s var(--ease-out) 1.0s forwards;
+    }
+
+    @keyframes heroIn {
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    /* scroll cue — animated chevron */
+    .hero-scroll-cue {
+      position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
+      z-index:2; display:flex; flex-direction:column; align-items:center; gap:6px;
+      opacity:0;
+      animation: heroIn 0.7s var(--ease-out) 1.6s forwards;
+    }
+    .hero-scroll-cue span {
+      display:block; width:20px; height:20px;
+      border-right:2px solid rgba(255,255,255,.45);
+      border-bottom:2px solid rgba(255,255,255,.45);
+      transform:rotate(45deg);
+      animation: scrollBounce 1.6s var(--ease-in-out) infinite;
+    }
+    .hero-scroll-cue span:nth-child(2) { animation-delay:.18s; opacity:.6; }
+    .hero-scroll-cue span:nth-child(3) { animation-delay:.36s; opacity:.32; }
+    @keyframes scrollBounce {
+      0%,100% { transform:rotate(45deg) translateY(0);   opacity:inherit; }
+      50%      { transform:rotate(45deg) translateY(5px); opacity:.9; }
+    }
+
+    /* ── Shared button base ── */
+    .btn-primary,
+    .btn-outline,
+    .btn-book,
+    .btn-inquire,
+    .btn-send {
+      position:relative; overflow:hidden;
+      /* ripple span */
+    }
+    .btn-primary .ripple,
+    .btn-outline .ripple,
+    .btn-book    .ripple,
+    .btn-inquire .ripple,
+    .btn-send    .ripple,
+    .btn-callnow .ripple {
+      position:absolute; border-radius:50%;
+      background:rgba(255,255,255,.22);
+      transform:scale(0);
+      animation: rippleOut 0.7s cubic-bezier(0,0,.2,1) forwards;
+      pointer-events:none;
+    }
+    @keyframes rippleOut {
+      to { transform:scale(4.5); opacity:0; }
+    }
+
+    /* ── Shimmer shared ── */
+    .btn-primary::before,
+    .btn-book::before,
+    .btn-send::before {
+      content:'';
+      position:absolute; top:0; left:-120%; width:55%; height:100%;
+      background:linear-gradient(110deg,transparent 0%,rgba(255,255,255,.18) 50%,transparent 100%);
+      transition: left var(--dur-slow) var(--ease-out);
+      pointer-events:none;
+    }
+    .btn-primary:hover::before,
+    .btn-book:hover::before,
+    .btn-send:hover::before { left:130%; }
+
+    .btn-primary {
+      background:var(--blue); color:#fff;
+      padding:13px 30px; border-radius:var(--radius);
+      font-weight:600; font-size:.92rem; border:2px solid var(--blue);
+      display:inline-block;
+      transition:
+        background  var(--dur-base) var(--ease-material),
+        border-color var(--dur-base) var(--ease-material),
+        transform   var(--dur-base) var(--ease-spring),
+        box-shadow  var(--dur-base) var(--ease-material);
+    }
+    .btn-primary:hover {
+      background:var(--blue-dark); border-color:var(--blue-dark);
+      transform:translateY(-3px) scale(1.04);
+      box-shadow:0 10px 32px rgba(26,79,160,.44);
+    }
+    .btn-primary:active { transform:translateY(-1px) scale(1.01); transition-duration:var(--dur-fast); }
+
+    .btn-outline {
+      background:transparent; color:#fff;
+      padding:13px 30px; border-radius:var(--radius);
+      font-weight:600; font-size:.92rem;
+      border:2px solid rgba(255,255,255,.55);
+      display:inline-block;
+      transition:
+        background   var(--dur-base) var(--ease-material),
+        border-color var(--dur-base) var(--ease-material),
+        transform    var(--dur-base) var(--ease-spring),
+        box-shadow   var(--dur-base) var(--ease-material);
+    }
+    .btn-outline:hover {
+      background:rgba(255,255,255,.1);
+      border-color:rgba(255,255,255,.85);
+      transform:translateY(-3px) scale(1.04);
+      box-shadow:0 8px 24px rgba(255,255,255,.1);
+    }
+    .btn-outline:active { transform:translateY(-1px) scale(1.01); transition-duration:var(--dur-fast); }
+
+    /* ============================================================
+       ABOUT
+    ============================================================ */
+    #about { padding:90px 0; background:#fff; }
+
+    .about-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:60px; align-items:center;
+    }
+
+    .about-badges { margin-top:28px; display:flex; flex-direction:column; gap:16px; }
+
+    .badge-item {
+      display:flex; align-items:flex-start; gap:14px;
+      transition: transform var(--dur-base) var(--ease-out);
+    }
+    .badge-item:hover { transform:translateX(6px); }
+
+    .badge-icon {
+      width:34px; height:34px; background:var(--light-gray);
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      font-size:14px; color:var(--blue); flex-shrink:0;
+      transition:
+        background var(--dur-base) var(--ease-material),
+        color      var(--dur-base) var(--ease-material),
+        transform  var(--dur-base) var(--ease-spring),
+        box-shadow var(--dur-base) var(--ease-material);
+    }
+    .badge-item:hover .badge-icon {
+      background:var(--blue); color:#fff;
+      transform:scale(1.12) rotate(-6deg);
+      box-shadow: 0 4px 14px rgba(26,79,160,.28);
+    }
+    .badge-item strong { display:block; font-weight:600; color:var(--navy); margin-bottom:2px; font-size:.9rem; }
+    .badge-item p      { font-size:.84rem; color:var(--text-muted); margin:0; }
+
+    .sr-logo-card {
+      background:var(--off-white); border:1px solid var(--border);
+      border-radius:var(--radius-lg); text-align:center;
+      width:100%; max-width:340px; margin:0 auto;
+      transition:
+        transform  var(--dur-slow) var(--ease-spring),
+        box-shadow var(--dur-slow) var(--ease-out);
+      will-change:transform;
+    }
+    .about-logo-box:hover .sr-logo-card {
+      transform:translateY(-8px);
+      box-shadow:0 24px 56px rgba(13,30,53,.14);
+    }
+    .sr-logo-card img {
+      width:100%; height:100%; object-fit:cover; display:block;
+      transition:transform var(--dur-slower) var(--ease-out);
+    }
+    .sr-logo-card:hover img { transform:scale(1.045); }
+
+    /* ============================================================
+       PRODUCTS
+    ============================================================ */
+    #products { padding:90px 0; background:var(--off-white); }
+
+    .products-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:28px;
+      margin-top:8px;
+    }
+
+    .product-card {
+      background:#fff; border-radius:var(--radius-lg);
+      overflow:hidden; border:1px solid var(--border);
+      will-change:transform;
+      /* GPU-composited transition for 60fps */
+      transition:
+        transform  var(--dur-slow) var(--ease-spring),
+        box-shadow var(--dur-slow) var(--ease-out),
+        border-color var(--dur-base) var(--ease-material);
+    }
+    .product-card:hover {
+      box-shadow:
+        0 0 0 1.5px rgba(26,79,160,.12),
+        0 8px 24px rgba(13,30,53,.10),
+        0 20px 60px rgba(13,30,53,.14);
+      transform:translateY(-10px) scale(1.012);
+      border-color:rgba(26,79,160,.2);
+    }
+
+    .product-img-wrap { height:200px; overflow:hidden; background:#fff; }
+    .product-img-wrap img {
+      width:100%; height:100%; object-fit:contain;
+      transition:transform var(--dur-slower) var(--ease-out);
+    }
+    .product-card:hover .product-img-wrap img { transform:scale(1.08); }
+
+    .product-body { padding:22px 24px 26px; }
+    .product-body h3 {
+      font-family:'Merriweather', serif; font-size:1rem; font-weight:700;
+      color:var(--navy); margin-bottom:8px;
+    }
+    .product-body p { font-size:.85rem; color:var(--text-muted); margin-bottom:18px; }
+
+    .btn-inquire {
+      display:inline-block; padding:9px 24px;
+      border:2px solid var(--navy); color:var(--navy);
+      border-radius:var(--radius); font-size:.82rem; font-weight:600;
+      transition:
+        background    var(--dur-base) var(--ease-material),
+        color         var(--dur-base) var(--ease-material),
+        border-color  var(--dur-base) var(--ease-material),
+        transform     var(--dur-base) var(--ease-spring),
+        box-shadow    var(--dur-base) var(--ease-material);
+    }
+    .btn-inquire:hover {
+      background:var(--navy); color:#fff;
+      transform:translateY(-2px) scale(1.04);
+      box-shadow:0 6px 18px rgba(13,30,53,.24);
+    }
+    .btn-inquire:active { transform:scale(1.01) translateY(-1px); transition-duration:var(--dur-fast); }
+
+    /* ============================================================
+       SERVICES
+    ============================================================ */
+    #services { padding:90px 0; background:#fff; }
+
+    .services-header {
+      display:flex; justify-content:space-between; align-items:flex-start;
+      gap:24px; margin-bottom:44px;
+    }
+    .services-header .section-heading { margin-bottom:8px; }
+
+    .btn-book {
+      display:inline-block; background:var(--blue); color:#fff;
+      padding:12px 28px; border-radius:var(--radius);
+      font-size:.85rem; font-weight:600; flex-shrink:0; margin-top:6px;
+      transition:
+        background var(--dur-base) var(--ease-material),
+        transform  var(--dur-base) var(--ease-spring),
+        box-shadow var(--dur-base) var(--ease-material);
+    }
+    .btn-book:hover {
+      background:var(--blue-dark);
+      transform:translateY(-3px) scale(1.04);
+      box-shadow:0 10px 28px rgba(26,79,160,.38);
+    }
+    .btn-book:active { transform:translateY(-1px) scale(1.01); transition-duration:var(--dur-fast); }
+
+    .services-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+    }
+
+    .service-card {
+      background:var(--off-white); border:1px solid var(--border);
+      border-radius:var(--radius-lg); padding:30px 26px;
+      will-change:transform;
+      transition:
+        transform    var(--dur-slow) var(--ease-spring),
+        box-shadow   var(--dur-slow) var(--ease-out),
+        border-color var(--dur-base) var(--ease-material),
+        background   var(--dur-base) var(--ease-material);
+    }
+    .service-card:hover {
+      box-shadow:
+        0 0 0 1.5px rgba(26,79,160,.1),
+        0 8px 24px rgba(13,30,53,.10),
+        0 16px 48px rgba(13,30,53,.12);
+      transform:translateY(-8px) scale(1.012);
+      border-color:rgba(26,79,160,.18);
+      background:#fff;
+    }
+
+    .service-icon {
+      font-size:1.8rem; margin-bottom:14px; display:inline-block;
+      transition:transform var(--dur-base) var(--ease-spring);
+    }
+    .service-card:hover .service-icon { transform:scale(1.28) rotate(-8deg); }
+
+    .service-card h3 {
+      font-family:'Merriweather', serif; font-size:.95rem;
+      font-weight:700; color:var(--navy); margin-bottom:10px;
+    }
+    .service-card p { font-size:.84rem; color:var(--text-muted); line-height:1.6; }
+
+    /* ============================================================
+       TESTIMONIALS
+    ============================================================ */
+    #testimonials { padding:90px 0; background:var(--off-white); }
+
+    .testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+
+    .testi-card {
+      background:#fff; border:1px solid var(--border);
+      border-radius:var(--radius-lg); padding:28px 26px;
+      position:relative; will-change:transform;
+      transition:
+        transform    var(--dur-slow) var(--ease-spring),
+        box-shadow   var(--dur-slow) var(--ease-out),
+        border-color var(--dur-base) var(--ease-material);
+    }
+
+    /* decorative quote mark */
+    .testi-card::before {
+      content:'\201C';
+      position:absolute; top:12px; right:18px;
+      font-family:'Merriweather', serif; font-size:4.5rem;
+      line-height:1; pointer-events:none;
+      color:var(--light-gray);
+      transition: color var(--dur-slow) var(--ease-out),
+                  transform var(--dur-slow) var(--ease-out);
+    }
+    .testi-card:hover::before {
+      color:rgba(26,79,160,.1);
+      transform:scale(1.15) rotate(-4deg);
+    }
+    .testi-card:hover {
+      box-shadow:
+        0 0 0 1.5px rgba(26,79,160,.1),
+        0 8px 24px rgba(13,30,53,.1),
+        0 16px 40px rgba(13,30,53,.12);
+      transform:translateY(-7px);
+      border-color:rgba(26,79,160,.16);
+    }
+
+    .testi-quote {
+      font-size:.88rem; color:var(--text); line-height:1.7;
+      margin-bottom:22px; font-style:italic;
+    }
+    .testi-author { display:flex; align-items:center; gap:12px; }
+
+    .testi-avatar {
+      width:42px; height:42px; background:var(--navy); border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; font-size:.7rem; font-weight:700; flex-shrink:0;
+      transition:
+        transform  var(--dur-base) var(--ease-spring),
+        box-shadow var(--dur-base) var(--ease-material);
+    }
+    .testi-card:hover .testi-avatar {
+      transform:scale(1.14);
+      box-shadow:0 4px 16px rgba(13,30,53,.28);
+    }
+
+    .testi-author strong { display:block; font-size:.88rem; font-weight:600; color:var(--navy); }
+    .testi-author span   { font-size:.78rem; color:var(--text-muted); }
+
+    /* ============================================================
+       GALLERY
+    ============================================================ */
+    #gallery { padding:90px 0; background:#fff; }
+
+    .gallery-grid {
+      display:grid; grid-template-columns:repeat(4,1fr); gap:16px;
+    }
+
+    .gallery-item {
+      border-radius:var(--radius); overflow:hidden;
+      aspect-ratio:1/1; background:#fff;
+      position:relative; will-change:transform;
+      transition:
+        transform  var(--dur-slow) var(--ease-spring),
+        box-shadow var(--dur-slow) var(--ease-out);
+    }
+    .gallery-item:hover {
+      box-shadow:0 14px 44px rgba(13,30,53,.18);
+      transform:scale(1.03) translateY(-4px);
+      z-index:2;
+    }
+
+    /* dark overlay fade on hover */
+    .gallery-item::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(180deg,transparent 40%,rgba(13,30,53,.50) 100%);
+      opacity:0;
+      transition:opacity var(--dur-base) var(--ease-material);
+      border-radius:var(--radius);
+      pointer-events:none;
+    }
+    .gallery-item:hover::after { opacity:1; }
+
+    .gallery-item img {
+      width:100%; height:100%; object-fit:contain;
+      transition:transform var(--dur-slower) var(--ease-out);
+    }
+    .gallery-item:hover img { transform:scale(1.1); }
+
+    /* ============================================================
+       CONTACT
+    ============================================================ */
+    #contact { padding:90px 0; background:var(--navy2); }
+
+    .contact-grid {
+      display:grid; grid-template-columns:1fr 1.1fr;
+      gap:60px; align-items:start;
+    }
+
+    .contact-details {
+      margin-top:30px; display:flex; flex-direction:column; gap:14px;
+    }
+
+    .contact-row {
+      display:flex; align-items:flex-start; gap:12px;
+      color:rgba(255,255,255,.72); font-size:.88rem;
+      transition:
+        transform var(--dur-base) var(--ease-out),
+        color     var(--dur-fast) var(--ease-material);
+    }
+    .contact-row:hover { transform:translateX(6px); color:rgba(255,255,255,.96); }
+    .contact-icon { font-size:1rem; flex-shrink:0; }
+
+    .contact-form-box {
+      background:#fff; border-radius:var(--radius-lg);
+      padding:36px 32px; box-shadow:var(--shadow-lg);
+      transition:box-shadow var(--dur-slow) var(--ease-out);
+    }
+    .contact-form-box:focus-within {
+      box-shadow:0 24px 72px rgba(0,0,0,.22);
+    }
+
+    .form-group { margin-bottom:18px; }
+
+    .form-group label {
+      display:block; font-size:.8rem; font-weight:600; color:var(--text);
+      margin-bottom:7px;
+      transition:color var(--dur-fast) var(--ease-material);
+    }
+    .form-group:focus-within label { color:var(--blue); }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width:100%; padding:11px 14px;
+      border:1.5px solid var(--border); border-radius:var(--radius);
+      font-size:.88rem; font-family:'Inter', sans-serif;
+      color:var(--text); background:#fff; outline:none;
+      transition:
+        border-color var(--dur-base) var(--ease-material),
+        box-shadow   var(--dur-base) var(--ease-material),
+        transform    var(--dur-fast) var(--ease-out);
+    }
+    .form-group textarea { min-height:110px; resize:vertical; }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color:var(--blue);
+      box-shadow:0 0 0 4px rgba(26,79,160,.13);
+      transform:translateY(-1px);
+    }
+
+    .btn-send {
+      width:100%; padding:13px; background:var(--navy); color:#fff;
+      border:none; border-radius:var(--radius);
+      font-size:.92rem; font-weight:600; cursor:pointer;
+      transition:
+        background var(--dur-base) var(--ease-material),
+        transform  var(--dur-base) var(--ease-spring),
+        box-shadow var(--dur-base) var(--ease-material);
+    }
+    .btn-send:hover {
+      background:var(--blue);
+      transform:translateY(-2px) scale(1.015);
+      box-shadow:0 8px 24px rgba(26,79,160,.3);
+    }
+    .btn-send:active { transform:translateY(0) scale(1); transition-duration:var(--dur-fast); }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background:var(--navy); padding:64px 0 0;
+      color:rgba(255,255,255,.72); font-size:.88rem;
+    }
+
+    .footer-grid {
+      display:grid; grid-template-columns:2fr 1fr 1.2fr;
+      gap:48px; padding-bottom:48px;
+    }
+    .footer-brand p {
+      margin-top:14px; line-height:1.65;
+      max-width:280px; font-size:.84rem;
+    }
+    .footer-logo {
+      display:flex; align-items:center; gap:10px;
+      color:#fff; font-family:'Merriweather', serif; font-weight:700;
+    }
+    .footer-socials { display:flex; gap:10px; margin-top:20px; }
+    .social-btn {
+      width:34px; height:34px; border:1px solid rgba(255,255,255,.2);
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      color:rgba(255,255,255,.6); font-size:.8rem; font-weight:700;
+      transition:
+        border-color var(--dur-base) var(--ease-material),
+        color        var(--dur-base) var(--ease-material),
+        background   var(--dur-base) var(--ease-material),
+        transform    var(--dur-base) var(--ease-spring),
+        box-shadow   var(--dur-base) var(--ease-material);
+    }
+    .social-btn:hover {
+      border-color:#fff; color:#fff;
+      background:rgba(255,255,255,.08);
+      transform:scale(1.18) translateY(-2px);
+      box-shadow:0 4px 14px rgba(0,0,0,.2);
+    }
+
+    .footer-col h4 {
+      color:#fff; font-size:.88rem; font-weight:700; margin-bottom:18px;
+    }
+    .footer-col ul {
+      list-style:none; display:flex; flex-direction:column; gap:10px;
+    }
+    .footer-col ul a {
+      color:rgba(255,255,255,.58); font-size:.84rem;
+      display:inline-flex; align-items:center; gap:0;
+      transition:
+        color        var(--dur-base) var(--ease-material),
+        padding-left var(--dur-base) var(--ease-out);
+    }
+    .footer-col ul a:hover { color:#fff; padding-left:5px; }
+
+    .hours-text  { margin-bottom:8px; color:rgba(255,255,255,.68); font-size:.84rem; }
+    .hours-text strong { color:#fff; }
+    .hours-emerg { margin-top:12px; font-size:.78rem; color:rgba(255,255,255,.48); font-style:italic; }
+
+    .footer-bottom {
+      border-top:1px solid rgba(255,255,255,.1); padding:20px 0;
+      text-align:center; font-size:.78rem; color:rgba(255,255,255,.36);
+    }
+
+    /* ============================================================
+       BACK TO TOP — fade-slide instead of display toggle
+    ============================================================ */
+    #backTop {
+      position:fixed; bottom:28px; right:28px;
+      width:44px; height:44px; background:var(--blue); color:#fff;
+      border:none; border-radius:50%; font-size:1.1rem; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 18px rgba(26,79,160,.38);
+      /* visibility-based toggle — smooth in both directions */
+      opacity:0; visibility:hidden;
+      transform:translateY(10px);
+      transition:
+        opacity     var(--dur-base) var(--ease-material),
+        visibility  var(--dur-base) var(--ease-material),
+        transform   var(--dur-base) var(--ease-spring),
+        background  var(--dur-base) var(--ease-material),
+        box-shadow  var(--dur-base) var(--ease-material);
+      z-index:900;
+    }
+    #backTop.show {
+      opacity:1; visibility:visible; transform:translateY(0);
+    }
+    #backTop:hover {
+      background:var(--blue-dark);
+      transform:translateY(-4px) scale(1.1);
+      box-shadow:0 10px 28px rgba(26,79,160,.52);
+    }
+    #backTop:active { transform:translateY(-2px) scale(1.04); transition-duration:var(--dur-fast); }
+
+    /* ============================================================
+       PAGE LOADER
+    ============================================================ */
+    #page-loader {
+      position:fixed; inset:0; background:var(--navy);
+      z-index:9999; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; gap:22px;
+      transition:
+        opacity    0.6s var(--ease-material),
+        visibility 0.6s var(--ease-material);
+    }
+    #page-loader.fade-out { opacity:0; visibility:hidden; }
+
+    .loader-logo {
+      font-family:'Merriweather', serif; font-size:1.5rem;
+      font-weight:900; color:#fff; letter-spacing:.06em;
+      opacity:0; animation:loaderUp 0.55s var(--ease-out) 0.15s forwards;
+    }
+    .loader-logo span { color:var(--blue); }
+
+    .loader-bar-wrap {
+      width:180px; height:3px;
+      background:rgba(255,255,255,.1); border-radius:3px; overflow:hidden;
+      opacity:0; animation:loaderUp 0.55s var(--ease-out) 0.3s forwards;
+    }
+    .loader-bar {
+      height:100%; width:0%; background:var(--blue);
+      border-radius:3px;
+      animation:loadBar 1.5s var(--ease-in-out) 0.45s forwards;
+    }
+    .loader-tagline {
+      font-size:.7rem; font-weight:600; letter-spacing:.2em;
+      text-transform:uppercase; color:rgba(255,255,255,.35);
+      opacity:0; animation:loaderUp 0.55s var(--ease-out) 0.5s forwards;
+    }
+
+    @keyframes loaderUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+    @keyframes loadBar  {
+      0%   { width:0%; }
+      35%  { width:50%; }
+      65%  { width:76%; }
+      100% { width:100%; }
+    }
+
+    /* ============================================================
+       WHATSAPP FLOAT
+    ============================================================ */
+    #whatsapp-float {
+      position:fixed; bottom:28px; left:28px;
+      width:56px; height:56px; background:#25D366;
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      z-index:900; cursor:pointer; text-decoration:none;
+      box-shadow:0 4px 22px rgba(37,211,102,.42);
+      transition:
+        transform  var(--dur-base) var(--ease-spring),
+        box-shadow var(--dur-base) var(--ease-material);
+    }
+    /* two-ring pulse */
+    #whatsapp-float::before,
+    #whatsapp-float::after {
+      content:''; position:absolute;
+      border-radius:50%; opacity:0;
+      border:2px solid #25D366;
+    }
+    #whatsapp-float::before {
+      inset:-7px;
+      animation:waPulse 2.4s var(--ease-material) infinite;
+    }
+    #whatsapp-float::after  {
+      inset:-16px;
+      animation:waPulse 2.4s var(--ease-material) 0.6s infinite;
+    }
+    @keyframes waPulse {
+      0%   { transform:scale(.85); opacity:.6; }
+      70%  { transform:scale(1.4); opacity:0; }
+      100% { transform:scale(1.4); opacity:0; }
+    }
+    #whatsapp-float:hover {
+      transform:scale(1.15) translateY(-4px);
+      box-shadow:0 12px 32px rgba(37,211,102,.55);
+    }
+
+    .wa-icon { width:30px; height:30px; fill:#fff; position:relative; z-index:1; }
+
+    .wa-tooltip {
+      position:absolute; left:calc(100% + 14px); top:50%;
+      transform:translateY(-50%) translateX(-8px);
+      background:#fff; color:var(--navy);
+      font-size:.74rem; font-weight:700; white-space:nowrap;
+      padding:6px 12px; border-radius:6px;
+      box-shadow:0 4px 18px rgba(0,0,0,.14);
+      opacity:0; pointer-events:none;
+      transition:
+        opacity   var(--dur-base) var(--ease-material),
+        transform var(--dur-base) var(--ease-out);
+    }
+    .wa-tooltip::before {
+      content:''; position:absolute; right:100%; top:50%;
+      transform:translateY(-50%);
+      border:5px solid transparent; border-right-color:#fff;
+    }
+    #whatsapp-float:hover .wa-tooltip {
+      opacity:1; transform:translateY(-50%) translateX(0);
+    }
+
+    /* ============================================================
+       SECTION HEADER SPACING
+    ============================================================ */
+    .section-header { margin-bottom:44px; }
+
+    /* ============================================================
+       CARD 3D TILT — applied via JS
+    ============================================================ */
+    .tilt-card { transform-style:preserve-3d; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width:1024px) {
+      .about-grid { gap:40px; }
+      .footer-grid { grid-template-columns:1fr 1fr; gap:36px; }
+      .footer-brand { grid-column:1/-1; }
+    }
+    @media (max-width:900px) {
+      .nav-links, .btn-callnow { display:none; }
+      .hamburger { display:flex; }
+      .products-grid, .services-grid, .testi-grid { grid-template-columns:repeat(2,1fr); }
+      .gallery-grid { grid-template-columns:repeat(2,1fr); }
+      .about-grid { grid-template-columns:1fr; gap:36px; }
+      .about-logo-box { order:-1; }
+      .contact-grid { grid-template-columns:1fr; gap:36px; }
+      .services-header { flex-direction:column; align-items:flex-start; }
+    }
+    @media (max-width:600px) {
+      .products-grid, .services-grid, .testi-grid, .gallery-grid { grid-template-columns:1fr; }
+      .contact-form-box { padding:26px 20px; }
+      .footer-grid { grid-template-columns:1fr; gap:28px; }
+    }
+    /* reduce motion */
+    @media (prefers-reduced-motion:reduce) {
+      *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div id="page-loader">
+  <div class="loader-logo">SR <span>Automobiles</span></div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="loader-tagline">Ooty &nbsp;·&nbsp; Nilgiris</div>
+</div>
+
+<!-- WHATSAPP FLOAT -->
+<a id="whatsapp-float" href="https://wa.me/919876543210" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg class="wa-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16.004 2.667C8.637 2.667 2.667 8.637 2.667 16.004c0 2.352.62 4.654 1.8 6.668L2.667 29.333l6.84-1.775a13.29 13.29 0 0 0 6.497 1.697h.004c7.367 0 13.325-5.97 13.325-13.337 0-3.558-1.387-6.9-3.906-9.414a13.23 13.23 0 0 0-9.423-3.837zm0 24.387a11.06 11.06 0 0 1-5.65-1.548l-.404-.24-4.064 1.055 1.082-3.946-.264-.406a11.016 11.016 0 0 1-1.698-5.965c0-6.093 4.963-11.054 11.062-11.054 2.955 0 5.73 1.15 7.815 3.238a10.99 10.99 0 0 1 3.234 7.83c-.003 6.09-4.965 11.036-11.113 11.036zm6.07-8.277c-.334-.166-1.97-.97-2.276-1.08-.306-.111-.528-.166-.75.167-.222.334-.86 1.08-1.055 1.302-.194.222-.389.25-.722.083-.334-.167-1.41-.52-2.685-1.655-.993-.884-1.663-1.975-1.858-2.309-.194-.334-.021-.514.146-.68.15-.148.334-.388.5-.583.167-.194.222-.334.333-.556.111-.222.056-.416-.028-.583-.083-.166-.75-1.806-1.027-2.472-.27-.647-.546-.56-.75-.57l-.638-.011a1.224 1.224 0 0 0-.888.416c-.306.334-1.166 1.138-1.166 2.777s1.193 3.222 1.36 3.445c.166.222 2.347 3.583 5.688 5.027.794.343 1.415.548 1.898.702.797.254 1.523.218 2.096.132.639-.095 1.97-.805 2.248-1.583.278-.777.278-1.443.195-1.583-.083-.14-.306-.222-.64-.389z"/>
+  </svg>
+  <span class="wa-tooltip">Chat on WhatsApp</span>
+</a>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="images/logos.png" alt="SR Automobiles" style="height:40px;width:auto;">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#hero"      data-section="hero">Home</a></li>
+      <li><a href="#about"     data-section="about">About</a></li>
+      <li><a href="#products"  data-section="products">Products</a></li>
+      <li><a href="#services"  data-section="services">Services</a></li>
+      <li><a href="#gallery"   data-section="gallery">Gallery</a></li>
+    </ul>
+    <a href="tel:+919876543210" class="btn-callnow">📞 Call Now</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE OVERLAY -->
+<div class="mobile-overlay" id="mobileOverlay">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <ul>
+    <li><a href="#hero"      class="mobile-link">Home</a></li>
+    <li><a href="#about"     class="mobile-link">About</a></li>
+    <li><a href="#products"  class="mobile-link">Products</a></li>
+    <li><a href="#services"  class="mobile-link">Services</a></li>
+    <li><a href="#gallery"   class="mobile-link">Gallery</a></li>
+    <li><a href="tel:+919876543210" class="mobile-link">Call Now</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag-line">
+      <span class="line"></span>Trusted Since 1995<span class="line"></span>
+    </div>
+    <h1 class="hero-title">Quality Tiller &amp; Tractor<br/>Tines in Ooty</h1>
+    <p class="hero-sub">Your trusted partner for genuine agricultural spare parts and expert tractor services in the heart of the Nilgiris.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary">View Products</a>
+      <a href="#contact"  class="btn-outline">Get a Quote</a>
+    </div>
+  </div>
+  <!-- scroll cue -->
+  <div class="hero-scroll-cue" aria-hidden="true">
+    <span></span><span></span><span></span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text" data-aos="fade-right" data-aos-duration="800">
+        <p class="tag-label">Since 1995</p>
+        <h2 class="section-heading">About SR Automobiles</h2>
+        <p class="body-text">We specialize in providing high-quality, genuine spare parts for all agricultural machinery. Based in Ooty, we understand the unique demands of hill-station farming.</p>
+        <p class="body-text">Our team of experienced mechanics ensures your tillers and tractors stay in peak condition, minimizing downtime during crucial harvesting seasons. We source directly from manufacturers to ensure you get only the best.</p>
+        <div class="about-badges">
+          <div class="badge-item" data-aos="fade-right" data-aos-delay="120" data-aos-duration="700">
+            <span class="badge-icon">✔</span>
+            <div><strong>Genuine Parts</strong><p>100% original manufacturer spares.</p></div>
+          </div>
+          <div class="badge-item" data-aos="fade-right" data-aos-delay="220" data-aos-duration="700">
+            <span class="badge-icon">⚙</span>
+            <div><strong>Expert Support</strong><p>Decades of combined experience.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="about-logo-box" data-aos="zoom-in" data-aos-delay="160" data-aos-duration="750">
+        <div class="sr-logo-card" style="padding:0;overflow:hidden;border:none;max-width:450px;">
+          <img src="images/logo.jpg" alt="SR Automobiles Logo" style="width:100%;height:100%;object-fit:cover;display:block;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <h2 class="section-heading centered">Our Featured Products</h2>
+      <div class="underline-accent"></div>
+    </div>
+    <div class="products-grid">
+      <div class="product-card tilt-card" data-aos="fade-up" data-aos-delay="0"   data-aos-duration="720">
+        <div class="product-img-wrap"><img src="images/product1.png" alt="Tiller Tines"></div>
+        <div class="product-body"><h3>Tiller Tines</h3><p>Premium grade steel blades for efficient soil preparation.</p><a href="#contact" class="btn-inquire">Inquire Now</a></div>
+      </div>
+      <div class="product-card tilt-card" data-aos="fade-up" data-aos-delay="140" data-aos-duration="720">
+        <div class="product-img-wrap"><img src="images/product2.png" alt="Tractor Tines"></div>
+        <div class="product-body"><h3>Tractor Tines</h3><p>High-durability cultivator tines for all major tractor brands.</p><a href="#contact" class="btn-inquire">Inquire Now</a></div>
+      </div>
+      <div class="product-card tilt-card" data-aos="fade-up" data-aos-delay="280" data-aos-duration="720">
+        <div class="product-img-wrap"><img src="images/product3.png" alt="Agricultural Spares"></div>
+        <div class="product-body"><h3>Agricultural Spares</h3><p>Complete range of belts, filters, and engine components.</p><a href="#contact" class="btn-inquire">Inquire Now</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="services-header" data-aos="fade-up" data-aos-duration="760">
+      <div>
+        <h2 class="section-heading">Professional Maintenance &amp; Repair</h2>
+        <p class="body-text">Our certified technicians are ready to handle everything from routine maintenance to complex engine overhauls.</p>
+      </div>
+      <a href="#contact" class="btn-book">Book a Service</a>
+    </div>
+    <div class="services-grid">
+      <div class="service-card tilt-card" data-aos="fade-up" data-aos-delay="0"   data-aos-duration="720">
+        <div class="service-icon">🔧</div><h3>Tiller Repair</h3>
+        <p>Expert troubleshooting and repair for all power tiller makes and models. Tine sharpening and blade replacements.</p>
+      </div>
+      <div class="service-card tilt-card" data-aos="fade-up" data-aos-delay="140" data-aos-duration="720">
+        <div class="service-icon">🚜</div><h3>Tractor Service</h3>
+        <p>Comprehensive tractor maintenance including oil changes, hydraulic system checks, and transmission repair.</p>
+      </div>
+      <div class="service-card tilt-card" data-aos="fade-up" data-aos-delay="280" data-aos-duration="720">
+        <div class="service-icon">👨‍🔧</div><h3>Mechanic Support</h3>
+        <p>On-call technical assistance and on-field repair services for urgent agricultural machine breakdowns.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up" data-aos-duration="760">
+      <h2 class="section-heading centered">What Our Farmers Say</h2>
+      <div class="underline-accent"></div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card tilt-card" data-aos="zoom-in" data-aos-delay="0"   data-aos-duration="720">
+        <p class="testi-quote">"SR Automobiles is the only place in Ooty where I can find genuine tines for my old tractor. Their service is incredibly fast."</p>
+        <div class="testi-author"><div class="testi-avatar">RK</div><div><strong>Raj Kumar</strong><span>Carrot Farmer, Coonoor</span></div></div>
+      </div>
+      <div class="testi-card tilt-card" data-aos="zoom-in" data-aos-delay="140" data-aos-duration="720">
+        <p class="testi-quote">"The mechanics here really know their work. My tiller has never run smoother. Highly recommend their service."</p>
+        <div class="testi-author"><div class="testi-avatar">MS</div><div><strong>M. Subramaniam</strong><span>Tea Estate Owner</span></div></div>
+      </div>
+      <div class="testi-card tilt-card" data-aos="zoom-in" data-aos-delay="280" data-aos-duration="720">
+        <p class="testi-quote">"Fair pricing and honest advice. They told me exactly what needed fixing and didn't push unnecessary spares."</p>
+        <div class="testi-author"><div class="testi-avatar">AV</div><div><strong>Anand V.</strong><span>Local Agriculturist</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up" data-aos-duration="760">
+      <h2 class="section-heading centered">Our Workshop &amp; Inventory</h2>
+      <div class="underline-accent"></div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="0"   data-aos-duration="720"><img src="images/gallery1.png" alt="Workshop"></div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="110" data-aos-duration="720"><img src="images/gallery2.png" alt="Tractor parts"></div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="220" data-aos-duration="720"><img src="images/gallery3.png" alt="Tiller"></div>
+      <div class="gallery-item" data-aos="fade-up" data-aos-delay="330" data-aos-duration="720"><img src="images/gallery4.png" alt="Spare parts"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info" data-aos="fade-right" data-aos-duration="800">
+        <h2 class="section-heading light">Need Service for Your Tiller or Tractor?</h2>
+        <p class="body-text light">Don't wait for a breakdown. Schedule a preventive maintenance check today and keep your farm running smooth.</p>
+        <div class="contact-details">
+          <div class="contact-row"><span class="contact-icon">📍</span><span>Main Road, Near Bus Stand, Ooty, Nilgiris - 643001</span></div>
+          <div class="contact-row"><span class="contact-icon">📞</span><span>+91 98765 43210</span></div>
+          <div class="contact-row"><span class="contact-icon">✉</span><span><a href="mailto:info@srautomobilesooty.com">info@srautomobilesooty.com</a></span></div>
+        </div>
+      </div>
+      <div class="contact-form-box" data-aos="fade-left" data-aos-delay="120" data-aos-duration="800">
+        <div class="form-group"><label>Full Name</label><input type="text" id="fullName" placeholder="Enter your name"></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" id="phoneNum" placeholder="Your contact number"></div>
+        <div class="form-group">
+          <label>Service Needed</label>
+          <select id="serviceType">
+            <option>Tiller Repair</option><option>Tractor Service</option>
+            <option>Spare Parts</option><option>Mechanic Support</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message</label><textarea id="msgText" placeholder="Describe your requirement"></textarea></div>
+        <button class="btn-send" id="sendRequestBtn">Send Request</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><div class="logo-mark small">SR</div><span>SR Automobiles</span></div>
+        <p>Providing high-quality agricultural spare parts and maintenance services to the Nilgiris farming community for over 25 years.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">⤴</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#products">Our Spares</a></li>
+          <li><a href="#services">Our Services</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Opening Hours</h4>
+        <p class="hours-text"><strong>Mon – Sat:</strong> 9:00 AM – 7:00 PM</p>
+        <p class="hours-text"><strong>Sunday:</strong> Closed</p>
+        <p class="hours-emerg">Emergency mechanic support available 24/7.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 SR Automobiles Ooty. All rights reserved. Designed for excellence in Nilgiris agriculture.</p>
+    </div>
+  </div>
+</footer>
+
+<button id="backTop" aria-label="Back to top">↑</button>
+
+<!-- ============================================================
+     SCRIPTS
+============================================================ -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ── AOS ── */
+  AOS.init({ once:true, offset:60, duration:700, easing:'ease-out-cubic' });
+
+  /* ── Page loader ── */
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const el = document.getElementById('page-loader');
+      if (!el) return;
+      el.classList.add('fade-out');
+      el.addEventListener('transitionend', () => el.remove(), { once:true });
+    }, 1900);
+  });
+
+  /* ── Scroll handler (passive, RAF-throttled) ── */
+  const navbar   = document.getElementById('navbar');
+  const backTop  = document.getElementById('backTop');
+  const heroBg   = document.getElementById('heroBg');
+  const sections = [...document.querySelectorAll('section[id]')];
+  const navLinks = [...document.querySelectorAll('.nav-links a[data-section]')];
+  const accents  = [...document.querySelectorAll('.underline-accent')];
+
+  let ticking = false;
+  function onScroll () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const sy = window.scrollY;
+
+      /* navbar */
+      navbar.classList.toggle('scrolled', sy > 50);
+
+      /* back-to-top */
+      backTop.classList.toggle('show', sy > 400);
+
+      /* hero parallax */
+      if (heroBg && sy < window.innerHeight) {
+        heroBg.style.transform = `translateY(${sy * 0.2}px)`;
+      }
+
+      /* active nav link */
+      let current = sections[0]?.id || '';
+      sections.forEach(s => { if (sy >= s.offsetTop - 110) current = s.id; });
+      navLinks.forEach(a => a.classList.toggle('active', a.dataset.section === current));
+
+      /* underline-accent reveal */
+      accents.forEach(el => {
+        if (!el.classList.contains('animate') && el.getBoundingClientRect().top < window.innerHeight - 30) {
+          el.classList.add('animate');
+        }
+      });
+
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  /* ── Back to top ── */
+  backTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+  /* ── Hamburger ── */
+  const hamburger     = document.getElementById('hamburger');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  const mobileClose   = document.getElementById('mobileClose');
+
+  hamburger?.addEventListener('click', () => {
+    mobileOverlay.classList.add('open');
+    hamburger.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+  const closeMenu = () => {
+    mobileOverlay.classList.remove('open');
+    hamburger.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+  mobileClose?.addEventListener('click', closeMenu);
+  document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', closeMenu));
+
+  /* ── Ripple ──
+     Creates a precise ink-bleed centred on the pointer's click position.
+     Uses cubic-bezier(0,0,.2,1) for fast expand / slow fade — feels physical. */
+  function spawnRipple (e) {
+    const btn  = e.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    const d    = Math.hypot(rect.width, rect.height) * 1.6;
+    const x    = e.clientX - rect.left - d / 2;
+    const y    = e.clientY - rect.top  - d / 2;
+    const rip  = document.createElement('span');
+    rip.className = 'ripple';
+    rip.style.cssText = `width:${d}px;height:${d}px;left:${x}px;top:${y}px;position:absolute;border-radius:50%;pointer-events:none;`;
+    btn.appendChild(rip);
+    rip.addEventListener('animationend', () => rip.remove(), { once:true });
+  }
+
+  document.querySelectorAll('.btn-primary,.btn-outline,.btn-send,.btn-callnow,.btn-book,.btn-inquire')
+    .forEach(btn => btn.addEventListener('click', spawnRipple));
+
+  /* ── 3D Card Tilt ──
+     Subtle perspective tilt follows the cursor inside the card.
+     Max tilt: ±5°. Resets smoothly on mouse leave using CSS transition. */
+  const TILT_MAX = 5;
+
+  document.querySelectorAll('.tilt-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r  = card.getBoundingClientRect();
+      const cx = r.left + r.width  / 2;
+      const cy = r.top  + r.height / 2;
+      const dx = (e.clientX - cx) / (r.width  / 2); /* -1 … 1 */
+      const dy = (e.clientY - cy) / (r.height / 2);
+      const rx =  dy * TILT_MAX * -1;
+      const ry =  dx * TILT_MAX;
+      card.style.transition = 'transform 60ms linear, box-shadow 60ms linear, border-color 280ms ease';
+      card.style.transform  = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = ''; /* back to CSS rule */
+      card.style.transform  = '';
+    });
+  });
+
+  /* ── Magnetic button effect ──
+     CTAs gently pull toward the cursor while hovered — feels tactile and alive.
+     Only on large screens (pointer: fine). */
+  const mediaFine = window.matchMedia('(pointer:fine)');
+  if (mediaFine.matches) {
+    const MAG_STRENGTH = 0.28;
+    document.querySelectorAll('.btn-primary,.btn-book,.btn-callnow').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const r   = btn.getBoundingClientRect();
+        const cx  = r.left + r.width  / 2;
+        const cy  = r.top  + r.height / 2;
+        const ox  = (e.clientX - cx) * MAG_STRENGTH;
+        const oy  = (e.clientY - cy) * MAG_STRENGTH;
+        btn.style.transform = `translate(${ox}px,${oy}px) scale(1.04)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+  }
+
+  /* ── Form: submit handler ── */
+  document.getElementById('sendRequestBtn')?.addEventListener('click', e => {
+    spawnRipple(e);
+    const name  = document.getElementById('fullName')?.value.trim();
+    const phone = document.getElementById('phoneNum')?.value.trim();
+    if (!name || !phone) { alert('Please fill in your name and phone number.'); return; }
+    alert(`Thank you, ${name}! We will contact you at ${phone} shortly.`);
+  });
+
+})();
+</script>
+</body>
+</html>
